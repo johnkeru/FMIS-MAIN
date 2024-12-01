@@ -1,0 +1,5 @@
+file/s to upload on production:
+App
+Dashboard
+Login
+SignatoryCreate

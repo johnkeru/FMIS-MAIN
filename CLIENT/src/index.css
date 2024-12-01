@@ -1,0 +1,34 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+/* App.css */
+
+.signature {
+    width: 100px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    background-color: white;
+    border-radius: 4px;
+    z-index: 10;
+}
+
+
+.loading-cell {
+    background-color: #dcdcdc;
+    animation: fadeInOut 1s infinite alternate;
+}
+
+@keyframes fadeInOut {
+    from {
+        opacity: 0.2;
+    }
+
+    to {
+        opacity: 1;
+    }
+}

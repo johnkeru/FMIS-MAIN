@@ -1,0 +1,14 @@
+KERU\SQLEXPRESS
+KERU\keruk
+
+https://isds1.nia.gov.ph:3000/Yunele/FMIS_DV/issues/3
+dito yung api natin for nia accounts
+
+ClientId for fmis test to accounts is 
+2b4ffb22-5827-49fb-97c1-df7564c6a4cc
+
+
+{
+  "ClientId": "2b4ffb22-5827-49fb-97c1-df7564c6a4cc",
+  "Owner": "908785"
+}

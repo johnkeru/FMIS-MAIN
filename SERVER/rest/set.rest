@@ -1,0 +1,10 @@
+# strictly check first before running
+GET http://localhost:5000/setRolesAndAssign
+
+
+###
+GET http://localhost:5000/setSignatories
+
+
+###
+GET http://localhost:5000/

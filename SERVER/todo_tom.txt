@@ -1,0 +1,3 @@
+to push on production:
+all inside static folder
+setter_data.js

@@ -1,0 +1,25 @@
+SERVER/node_modules
+CLIENT/node_modules
+# Logs
+logs
+*.log
+CLIENT/npm-debug.log*
+CLIENT/yarn-debug.log*
+CLIENT/yarn-error.log*
+CLIENT/pnpm-debug.log*
+CLIENT/lerna-debug.log*
+CLIENT/dist
+CLIENT/dist-ssr
+CLIENT/*.local
+
+# Editor directories and files
+CLIENT/.vscode/*
+CLIENT/!.vscode/extensions.json
+CLIENT/.idea
+CLIENT/.DS_Store
+CLIENT/*.suo
+CLIENT/*.ntvs*
+CLIENT/*.njsproj
+CLIENT/*.sln
+CLIENT/*.sw?
+
