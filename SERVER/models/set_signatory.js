@@ -10,31 +10,29 @@ const boxSchema = mongoose.Schema({
     isPayeeDivisionDependent: { type: Boolean, default: false },
 })
 
-// Position schema
 const positionSchema = mongoose.Schema({
-    payeeType: String,
     boxes: [boxSchema], // show this when type is 'position'
+    positionType: String
+})
+
+// Position schema
+const transactionSchema = mongoose.Schema({
+    reportName: String, // to filter what transactions types to show
+    transactionType: String,
+    positionTypes: [positionSchema]
 });
 
 // Responsibility Center schema
 const responsibilityCenterSchema = mongoose.Schema({
     particular: { type: String, required: true }, // IMO, CO, etc.
-    payeeTypes: { type: [positionSchema], default: [] },
+    transactionType: transactionSchema,
 });
 
 // Transaction Type schema
 const setSignatorychema = mongoose.Schema({
     responsibilityCenters: { type: [responsibilityCenterSchema], required: true },
-    createdAt: {
-        type: Date,
-        default: Date.now
-    }
+    createdAt: { type: Date, default: Date.now }
 });
 
 module.exports = mongoose.model('Set_Signatory', setSignatorychema);
-
-
-
-
-
 

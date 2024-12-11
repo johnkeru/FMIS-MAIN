@@ -11,7 +11,7 @@ const boxSchema = mongoose.Schema({
 const signatorySchema = mongoose.Schema({
     reportName: String,
     payee: String, // fullname of the payee. default is current user login
-    payeeType: String,
+    positionType: String,
     payeeDigits: Number, // 6 digits, which is the payee's unique identification number. default is current user login
     preparedDigits: Number, // 6 digits, which is the payee's unique identification number. default is current user login
     boxA: boxSchema,

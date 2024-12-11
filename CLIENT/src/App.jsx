@@ -1,4 +1,3 @@
-import { Typography } from '@mui/material';
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import UserProvider from './context/UserContext';
@@ -30,7 +29,7 @@ const App = () => {
         <Route path='roles/roles-assigned' element={<RolesAssignedTable />} />
 
         <Route path='signatories' element={<SignatoriesTable />} />
-        <Route path='/signatories/create-transaction-type' element={<CreateTransactionType />} />
+        <Route path='signatories/create-transaction-type' element={<CreateTransactionType />} />
         <Route path='signatories/create' element={<SignatoryCreate />} />
         <Route path='signatories/test' element={<Test />} />
 

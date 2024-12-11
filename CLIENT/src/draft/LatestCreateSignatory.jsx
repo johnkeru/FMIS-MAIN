@@ -9,7 +9,6 @@ import { useUser } from '../../context/UserContext';
 import CustomButton from '../../global/components/CustomButton';
 import DashboardHeader from '../../global/components/DashboardHeader';
 import TableLoading from '../../global/components/TableLoading';
-import { isAccountingRoles, isBudgetRoles, isCashRoles } from '../../utils/checkRole';
 import { boxConditions, filterEmployees } from './utils';
 
 const fetchSetSignatories = async () => {
@@ -17,9 +16,9 @@ const fetchSetSignatories = async () => {
     return response.data;
 };
 
-const positionTypes = [
+const payeeTypes = [
     "Below Division Manager",
-    "Division Manager",
+    "Division Manager A",
     "Department Manager & Project Manager",
     "Department Manager, under Office of the Administrator -Top Management -IAS -CORPLAN -PAIS -LEGAL",
     "Suppliers and Other Individuals/Agency Outside NIA",
@@ -28,10 +27,9 @@ const positionTypes = [
 ]
 
 const reportNames = [
-    'DISBURSEMENT VOUCHER',
-    'BUDGET',
-    'CASH',
-    // ... add more hehe
+    'Disbursement Vouchers',
+    'Budget',
+    'Cash',
 ]
 
 const SignatoryCreate = () => {
@@ -58,9 +56,8 @@ const SignatoryCreate = () => {
         defaultValues: {
             payee: currentUser.FirstName + ' ' + currentUser.LastName,
             payeeDigits: parseInt(currentUser.Username[0]),
-            positionType: null,
-            reportName: isAccountingRoles(currentUser) ? reportNames[0] : isBudgetRoles(currentUser) ? reportNames[1] : isCashRoles(currentUser) ? reportNames[2] : null,
-            transactionType: null,
+            payeeType: null,
+            reportName: null,
         }
     });
     const [boxes, setBoxes] = useState([]);
@@ -70,14 +67,12 @@ const SignatoryCreate = () => {
         queryFn: fetchSetSignatories,
     });
 
-    const [transactionTypes, setTransactionTypes] = useState([])
-    const [isPositionTypeModify, setIsPositionTypeModify] = useState(false);
+    const [isPayeeTypeModify, setIsPayeeTypeModify] = useState(false);
 
     const payeeValue = watch('payee', null)
     const payeeDigits = watch('payeeDigits', '')
-    const positionType = watch('positionType', null);
+    const payeeType = watch('payeeType', null);
     const reportName = watch('reportName', null);
-    const transactionType = watch('transactionType', null)
 
     const onSubmit = (formData) => {
         try {
@@ -85,12 +80,13 @@ const SignatoryCreate = () => {
                 preparedDigits: parseInt(currentUser.Username[0]),
                 payee: formData.payee.EmployeeFullName || formData.payee,
                 payeeDigits: formData.payeeDigits,
-                positionType: formData.positionType,
+                payeeType: formData.payeeType,
                 reportName: formData.reportName,
                 boxA: { ...boxes[0], positionTitle: boxes[0].displayPosition },
                 boxC: { ...boxes[1], positionTitle: boxes[1].displayPosition },
                 boxD: { ...boxes[2], positionTitle: boxes[2].displayPosition },
             }
+
             mutation.mutate(payload, {
                 onSuccess: (message) => {
                     queryClient.invalidateQueries(['signatories', 0]);
@@ -104,24 +100,17 @@ const SignatoryCreate = () => {
         }
     };
 
-
-    // useEffect to get the transactionTypes based on reportName
-    useEffect(() => {
-        if(positionType && reportName){
-            api.get(`/get-transaction-types-by-report-name?reportName=${reportName}&positionType=${positionType}`)
-                .then(res => setTransactionTypes(res.data.transactionTypes))
-        }
-    }, [positionType, reportName])
-
     useEffect(() => {
         // SHOWING BOXES
-        if (payeeValue && positionType && reportName && transactionType) {
+        if (payeeValue && payeeType) {
             // If payeeValue is an object, retrieve properties; otherwise, set defaults
             const payeeDepartment = typeof payeeValue === 'object' ? payeeValue.Department : null;
             const payeeDivision = typeof payeeValue === 'object' ? payeeValue.Division : null;
             // Automated payee type matching
-            const positionTypeBoxes = transactionType.positionTypes.find(pos => pos.positionType === positionType)
-            const updatedBoxes = positionTypeBoxes.boxes
+            let matchSignatories = data.foundSetSignatory.responsibilityCenters[0].payeeTypes.find((ptype) => ptype.payeeType === payeeType);
+            if (!matchSignatories) return setBoxes([]);
+            const boxes = matchSignatories.boxes
+            const updatedBoxes = boxes
                 .map((boxInfo) => {
                     const signatory = data.employees.find((emp) => boxConditions(boxInfo, emp, payeeDepartment, payeeDivision));
                     return {
@@ -135,8 +124,8 @@ const SignatoryCreate = () => {
             setBoxes(updatedBoxes);
         }
 
-        // Determine positionType based on payeeValue
-        if (payeeValue && !isPositionTypeModify) {
+        // Determine payeeType based on payeeValue
+        if (payeeValue && !isPayeeTypeModify) {
             const payeePosition = typeof payeeValue === 'object' ? payeeValue.PositionTitle : null;
             const payeeDepartment = typeof payeeValue === 'object' ? payeeValue.Department : null;
             const departmentManager =
@@ -144,16 +133,16 @@ const SignatoryCreate = () => {
                     ? 'Department Manager & Project Manager'
                     : undefined;
             const divisionManager = /Division Manager/i.test(payeePosition)
-                ? 'Division Manager'
+                ? 'Division Manager A'
                 : undefined;
             let otherEmp = undefined;
             if (payeeDepartment === 'OFFICE OF THE ADMINISTRATOR') otherEmp = "Department Manager, under Office of the Administrator -Top Management -IAS -CORPLAN -PAIS -LEGAL";
             let belowDivisionManager = undefined;
             // Assign 'Below Division Manager' only if no higher categories apply and otherEmp is not set
             if (!departmentManager && !divisionManager && !otherEmp && payeePosition) belowDivisionManager = 'Below Division Manager';
-            setValue('positionType', departmentManager || divisionManager || otherEmp || belowDivisionManager || '');
+            setValue('payeeType', departmentManager || divisionManager || otherEmp || belowDivisionManager || '');
         }
-    }, [payeeValue, positionType, reportName, transactionType]);
+    }, [payeeValue, payeeType]);
 
     // for alert message purpose
     const [showAlert, setShowAlert] = useState(true);
@@ -162,7 +151,7 @@ const SignatoryCreate = () => {
 
     useEffect(() => {
         if (boxes.length !== 0) {
-            const timer = setTimeout(() => setShowAlert(false), 20000);
+            const timer = setTimeout(() => setShowAlert(false), 8000);
             return () => clearTimeout(timer);
         }
     }, [boxes]);
@@ -194,7 +183,7 @@ const SignatoryCreate = () => {
                                         getOptionKey={(option) => (typeof option === 'string' ? option : option.EmployeeID + option.Rate)}
                                         value={payeeValue}
                                         onChange={(_, value) => {
-                                            setIsPositionTypeModify(false);
+                                            setIsPayeeTypeModify(false);
                                             field.onChange(value);
                                             if (!value) setBoxes([]);
                                         }}
@@ -214,7 +203,6 @@ const SignatoryCreate = () => {
                                                 variant="outlined"
                                                 margin="normal"
                                                 sx={{ mb: { xs: 1, sm: 2 } }}
-                                                size='small'
                                             />
                                         )}
                                         loading={isLoading}
@@ -256,41 +244,38 @@ const SignatoryCreate = () => {
                                             field.onChange(filteredValue); // Update field value
                                         }}
                                         value={payeeDigits} // Ensure a controlled value
-                                        size='small'
-                                        />
+                                    />
                                 )}
                             />
 
                             {/* Payee Types Autocomplete */}
                             <Controller
-                                name="positionType"
+                                name="payeeType"
                                 control={control}
                                 rules={{ required: 'This field is required' }}
                                 render={({ field }) => (
                                     <Autocomplete
                                         {...field}
-                                        options={positionTypes || []}
+                                        options={payeeTypes || []}
                                         getOptionLabel={(option) => option || ''}
-                                        value={positionType}
+                                        value={payeeType}
                                         onChange={(_, value) => {
-                                            setIsPositionTypeModify(true)
+                                            setIsPayeeTypeModify(true)
                                             field.onChange(value)
-                                            setValue('transactionType', null)
-                                            setBoxes([])
+                                            if (!value) setBoxes([])
                                         }}
                                         renderInput={(params) => (
-                                            <Tooltip title={!payeeValue ? 'Fill out the payee first' : ''} placement="top-start">
+                                            <Tooltip title={!payeeValue ? 'Select a payee first to select payee types' : ''} placement="top-start">
                                                 <TextField
                                                     required
                                                     {...params}
-                                                    label="Position Type"
-                                                    error={!!errors.positionType}
-                                                    helperText={errors.positionType ? errors.positionType.message : ''}
+                                                    label="Payee Type"
+                                                    error={!!errors.payeeType}
+                                                    helperText={errors.payeeType ? errors.payeeType.message : ''}
                                                     fullWidth
                                                     variant="outlined"
                                                     margin="normal"
                                                     sx={{ mb: { xs: 1, sm: 2 } }}
-                                                size='small'
                                                 />
                                             </Tooltip>
                                         )}
@@ -313,23 +298,21 @@ const SignatoryCreate = () => {
                                         getOptionLabel={(option) => option || ''}
                                         value={reportName}
                                         onChange={(_, value) => {
-                                            setIsPositionTypeModify(true)
+                                            setIsPayeeTypeModify(true)
                                             field.onChange(value)
-                                            setValue('transactionType', null)
-                                            setBoxes([])
+                                            if (!value) setBoxes([])
                                         }}
                                         renderInput={(params) => (
                                             <TextField
                                                 required
                                                 {...params}
                                                 label="Report Name"
-                                                error={!!errors.positionType}
-                                                helperText={errors.positionType ? errors.positionType.message : ''}
+                                                error={!!errors.payeeType}
+                                                helperText={errors.payeeType ? errors.payeeType.message : ''}
                                                 fullWidth
                                                 variant="outlined"
                                                 margin="normal"
                                                 sx={{ mb: { xs: 1, sm: 2 } }}
-                                                size='small'
                                             />
                                         )}
                                         loading={isLoading}
@@ -338,43 +321,6 @@ const SignatoryCreate = () => {
                                 )}
                             />
 
-                             {/*  Transaction Types Autocomplete */}
-                             <Controller
-                                name="transactionType"
-                                control={control}
-                                rules={{ required: 'This field is required' }}
-                                render={({ field }) => (
-                                    <Autocomplete
-                                        {...field}
-                                        options={transactionTypes}
-                                        getOptionLabel={(option) => option.transactionType || ''}
-                                        value={transactionType}
-                                        onChange={(_, value) => {
-                                            setIsPositionTypeModify(true)
-                                            field.onChange(value)
-                                            if (!value) setBoxes([])
-                                        }}
-                                        renderInput={(params) => (
-                                            <Tooltip title={!payeeValue || !positionType || !reportName ? 'Fill out payee, position type and report name first' : ''} placement="top-start">
-                                            <TextField
-                                                required
-                                                {...params}
-                                                label="Transaction Type"
-                                                error={!!errors.transactionType}
-                                                helperText={errors.transactionType ? errors.transactionType.message : ''}
-                                                fullWidth
-                                                variant="outlined"
-                                                margin="normal"
-                                                sx={{ mb: { xs: 1, sm: 2 } }}
-                                                size='small'
-                                            />
-                                            </Tooltip>
-                                        )}
-                                        loading={isLoading}
-                                        disabled={!payeeValue || !positionType || !reportName}
-                                    />
-                                )}
-                            />
 
                         </CardContent>
                     </Card>
@@ -385,9 +331,8 @@ const SignatoryCreate = () => {
                             <Box key={index} width='100%' display='grid'>
                                 <Card sx={{ p: 2, boxShadow: 3, }}>
                                     <CardContent sx={{ height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', }}>
-                                          
+                                        <Box>
                                             <Typography variant="h6" fontWeight={600} color="primary">{`${item.boxName.toUpperCase()}`}</Typography>
-                                          
                                             <Autocomplete
                                                 size='small'
                                                 freeSolo
@@ -409,10 +354,11 @@ const SignatoryCreate = () => {
                                                         variant="outlined"
                                                         fullWidth
                                                         margin="normal"
-                                                size='small'
                                                     />
                                                 )}
                                             />
+
+                                        </Box>
 
                                         <Autocomplete
                                             freeSolo
@@ -443,10 +389,11 @@ const SignatoryCreate = () => {
                                                     variant="outlined"
                                                     fullWidth
                                                     margin="normal"
-                                                size='small'
                                                 />
                                             )}
                                         />
+
+
                                     </CardContent>
                                 </Card>
                             </Box>

@@ -127,11 +127,11 @@ const TablePlain = ({ data, page, setPage, rowsPerPage, setRowsPerPage }) => {
                                 <TableCell>Payee 6 Digits</TableCell>
                                 <TableCell>
                                     <TableSortLabel
-                                        active={orderBy === 'payeeType'}
-                                        direction={orderBy === 'payeeType' ? order : 'asc'}
-                                        onClick={() => handleRequestSort('payeeType')}
+                                        active={orderBy === 'positionType'}
+                                        direction={orderBy === 'positionType' ? order : 'asc'}
+                                        onClick={() => handleRequestSort('positionType')}
                                     >
-                                        Payee Type
+                                        Position Type
                                     </TableSortLabel>
                                 </TableCell>
                                 <TableCell>
@@ -171,7 +171,7 @@ const TablePlain = ({ data, page, setPage, rowsPerPage, setRowsPerPage }) => {
                                         >
                                             <TableCell><TextSearchable columnName={signatory.payee} /></TableCell>
                                             <TableCell>{signatory.payeeDigits}</TableCell>
-                                            <TableCell>{signatory.payeeType}</TableCell>
+                                            <TableCell>{signatory.positionType}</TableCell>
                                             <TableCell
                                                 sx={{
                                                     whiteSpace: 'nowrap',

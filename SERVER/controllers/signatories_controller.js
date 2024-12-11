@@ -63,17 +63,45 @@ exports.createSignatory = async (req, res) => {
 
 exports.getSetSignatories = async (req, res) => {
     try {
-        const user = req.user
-        let foundSetSignatory = await setSignatory.findOne({
-            responsibilityCenters: {
-                $elemMatch: { particular: { $regex: responsibilityCenterToGeneral(user.Region), $options: 'i' } }
-            }
-        });
         const positionTitles = await positionTitle.find()
         const allEmployees = employees.filter(emp => emp.EmployeeFullName !== 'VACANT')
-        res.json({ foundSetSignatory, employees: allEmployees, positionTitles, })
+        res.json({ employees: allEmployees, positionTitles, })
     } catch (err) {
         console.error(err.message)
         res.status(500).send('Server error')
+    }
+}
+
+exports.getTransactionTypesByReportName = async (req, res) => {
+    try{
+        const user = req.user
+        const {reportName, positionType} = req.query
+        const results = await setSignatory.find({
+            $and: [
+                {
+                    responsibilityCenters: {
+                        $elemMatch: { particular: { $regex: responsibilityCenterToGeneral(user.Region), $options: 'i' } }
+                    }
+                },
+                {
+                    'responsibilityCenters.transactionType.reportName': reportName
+                },
+                {
+                    'responsibilityCenters.transactionType.positionTypes': {
+                        $elemMatch: { positionType: { $regex: positionType, $options: 'i' } }
+                    }
+                }
+            ]
+        });
+        // Extract and return the matching `transactionType`s
+        const transactionTypes = results.flatMap(doc =>
+            doc.responsibilityCenters
+                .map(center => center.transactionType)
+                .filter(transaction => transaction.reportName === reportName)
+        );
+        res.json({ transactionTypes,})
+    }catch(err){
+        console.error(err.message)
+        res.status(500).send('Server error')   
     }
 }

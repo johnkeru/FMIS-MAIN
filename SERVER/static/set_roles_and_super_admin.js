@@ -11,38 +11,28 @@ exports.setRolesAndAssign = async () => {
             name: 'BUDGET ADMIN',
             permission: 'Manages budget allocations and financial planning.',
         },
-        // {
-        //     name: 'DV ADMIN',
-        //     permission: 'Handles disbursement vouchers and related approvals.',
-        // },
-        {
-            name: 'ACCOUNTING ADMIN',
-            permission: 'Oversees accounting tasks and financial records.',
-        },
-        {
-            name: 'CASH ADMIN',
-            permission: 'Manages cash flow and liquidity for the organization.',
-        },
-        // Add each sub-role similarly as below
         { name: 'BUDGET MANAGER', permission: 'Budget planning and execution.' },
         { name: 'BUDGET ANALYST', permission: 'Analyzes budget forecasts and financial data.' },
         { name: 'BUDGET COORDINATOR', permission: 'Coordinates budgetary processes and approvals.' },
         { name: 'BUDGET OFFICER', permission: 'Oversees budget implementation and adherence.' },
 
+        {
+            name: 'ACCOUNTING ADMIN',
+            permission: 'Oversees accounting tasks and financial records.',
+        },
         { name: 'ACCOUNTING COUNTER', permission: 'Handles accounting counter tasks.' },
         { name: 'ACCOUNTING CLAIMS', permission: 'Manages accounting claims.' },
         { name: 'ACCOUNTING CLAIMS SECTION CHIEF', permission: 'Leads the claims section within accounting.' },
         { name: 'ACCOUNTING MANAGER', permission: 'Oversees the accounting department.' },
 
+        {
+            name: 'CASH ADMIN',
+            permission: 'Manages cash flow and liquidity for the organization.',
+        },
         { name: 'CASH MANAGER', permission: 'Oversees cash management strategies.' },
         { name: 'CASH ANALYST', permission: 'Analyzes cash flow and related data.' },
         { name: 'CASH COORDINATOR', permission: 'Coordinates cash-related transactions.' },
         { name: 'CASH OFFICER', permission: 'Manages day-to-day cash handling and records.' },
-
-        // { name: 'DV MANAGER', permission: 'Manages disbursement workflows.' },
-        // { name: 'DV ANALYST', permission: 'Analyzes disbursement data and trends.' },
-        // { name: 'DV COORDINATOR', permission: 'Coordinates disbursement approvals and documentation.' },
-        // { name: 'DV OFFICER', permission: 'Handles disbursement processing and compliance.' },
     ];
 
     // Delete all existing roles

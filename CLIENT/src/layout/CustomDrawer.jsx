@@ -13,6 +13,7 @@ import { useUser } from "../context/UserContext";
 import DisplayRoles from '../global/components/DisplayRoles';
 import LinkTo from '../global/components/LinkTo';
 import { isAllowAdminsOnly, isSuperAdmin } from '../utils/checkRole';
+import { IoMdAdd } from "react-icons/io";
 
 const CustomDrawer = () => {
   const { currentUser } = useUser();
@@ -48,7 +49,7 @@ const CustomDrawer = () => {
             isAllow={true}
             subLinks={[
               { name: 'Signatories', link: '/signatories', icon: <CiViewTable /> },
-              // { name: 'Create Transaction', link: '/signatories/create-transaction-type', icon: <IoMdAdd /> },
+              { name: 'Create Transaction', link: '/signatories/create-transaction-type', icon: <IoMdAdd /> },
               { name: 'Create Signatory', link: '/signatories/create', icon: <FaSignature /> },
               { name: 'Test', link: '/signatories/test', icon: <LuFileSignature /> },
             ]}

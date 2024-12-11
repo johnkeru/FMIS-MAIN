@@ -43,10 +43,10 @@ const employees = xlsx.utils.sheet_to_json(worksheet);
 // const emp = employees.filter(emp => /legal/i.test(emp.Department))
 // console.log(emp)
 
-// const emp = employees.filter(emp => /chairman/i.test(emp.PositionTitle))
+// const emp = employees.filter(emp => /Senior Deputy/i.test(emp.PositionTitle))
 // console.log(emp)
 
-const employee = employees.filter(emp => /rosales/i.test(emp.EmployeeFullName));
+const employee = employees.filter(emp => /Balanay/i.test(emp.EmployeeFullName));
 console.log(employee);
 
 
