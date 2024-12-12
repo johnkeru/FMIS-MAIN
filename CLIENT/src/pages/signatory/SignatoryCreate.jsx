@@ -162,7 +162,7 @@ const SignatoryCreate = () => {
 
     useEffect(() => {
         if (boxes.length !== 0) {
-            const timer = setTimeout(() => setShowAlert(false), 20000);
+            const timer = setTimeout(() => setShowAlert(false), 20000000);
             return () => clearTimeout(timer);
         }
     }, [boxes]);

@@ -26,5 +26,14 @@ module.exports = {
     DEPUTY_ADMINISTRATOR_FOR_ADMINISTRATIVE_AND_FINANCE_SECTOR: {
         findPosition: 'Deputy Administrator',
         displayPosition: 'Deputy Administrator For Administrative and Finance Sector'
-    }
+    },
+
+    BAC_CHAIRMAN: {
+        findPosition: 'BAC Chairman',
+        displayPosition: 'BAC Chairman'
+    },
+    CORPORATE_BOARD_SECRETARY: {
+        findPosition: 'Corporate Board Secretary',
+        displayPosition: 'Corporate Board Secretary'
+    },
 }
