@@ -65,8 +65,8 @@ module.exports = {
                             boxes: [
                                 {
                                     name: 'BOX A CERTIFIED',
-                                    findPosition: 'Department Manager A',
-                                    displayPosition: 'Manager, Administrative Department',
+                                    findPosition: POSITIONS.DEPUTY_ADMINISTRATOR_CONCERNED.findPosition,
+                                    displayPosition: POSITIONS.DEPUTY_ADMINISTRATOR_CONCERNED.displayPosition,
                                 },
                                 {
                                     name: 'BOX C CERTIFIED',
@@ -81,7 +81,7 @@ module.exports = {
                                     displayPosition: POSITIONS.SENIOR_DEPUTY_ADMINISTRATOR.displayPosition,
                                 },
                             ]
-                        },
+                        },  
 
                         {
                             positionType: 'Department Manager, under Office of the Administrator -Top Management -IAS -CORPLAN -PAIS -LEGAL',

@@ -40,15 +40,22 @@ const employees = xlsx.utils.sheet_to_json(worksheet);
 
 // console.log(emp);
 
-// const emp = employees.filter(emp => /legal/i.test(emp.Department))
+// const emp = employees.filter(emp => /Office of the Deputy Administrator for Engineering and Operations/i.test(emp.Department))
 // console.log(emp)
 
-// const emp = employees.filter(emp => /Senior Deputy/i.test(emp.PositionTitle))
+// const emp = employees.filter(emp => /Researcher Analyst A/i.test(emp.PositionTitle))
 // console.log(emp)
 
-const employee = employees.filter(emp => /Balanay/i.test(emp.EmployeeFullName));
+// const employee = employees.filter(emp => /Balanay/i.test(emp.EmployeeFullName));
+// console.log(employee);
+
+const employee = employees.filter(emp => /frya/i.test(emp.EmployeeFullName));
 console.log(employee);
 
+
+
+// const employee = employees.filter(emp => emp.SG == 7 && emp.Status === 'PERMANENT');
+// console.log(employee);
 
 // const employee = employees.filter(emp => /FINANCIAL MANAGEMENT DEPARTMENT/i.test(emp.Department) && /Department Manager A/i.test(emp.PositionTitle));
 // console.log(employee);
