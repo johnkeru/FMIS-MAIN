@@ -65,8 +65,8 @@ module.exports = {
                             boxes: [
                                 {
                                     name: 'BOX A CERTIFIED',
-                                    findPosition: 'Department Manager A',
-                                    displayPosition: 'Manager, Administrative Department',
+                                    findPosition: POSITIONS.MANAGER_ADMINISTRATIVE_DEPARTMENT.findPosition,
+                                    displayPosition: POSITIONS.MANAGER_ADMINISTRATIVE_DEPARTMENT.displayPosition,
                                 },
                                 {
                                     name: 'BOX C CERTIFIED',
@@ -77,8 +77,8 @@ module.exports = {
                                 },
                                 {
                                     name: 'BOX D APPROVED FOR PAYMENT',
-                                    findPosition: POSITIONS.SENIOR_DEPUTY_ADMINISTRATOR.findPosition,
-                                    displayPosition: POSITIONS.SENIOR_DEPUTY_ADMINISTRATOR.displayPosition,
+                                    findPosition: POSITIONS.DEPUTY_ADMINISTRATOR_FOR_ADMINISTRATIVE_AND_FINANCE_SECTOR.findPosition,
+                                    displayPosition: POSITIONS.DEPUTY_ADMINISTRATOR_FOR_ADMINISTRATIVE_AND_FINANCE_SECTOR.displayPosition,
                                 },
                             ]
                         },
@@ -88,8 +88,8 @@ module.exports = {
                             boxes: [
                                 {
                                     name: 'BOX A CERTIFIED',
-                                    findPosition: POSITIONS.SENIOR_DEPUTY_ADMINISTRATOR.findPosition,
-                                    displayPosition: POSITIONS.SENIOR_DEPUTY_ADMINISTRATOR.displayPosition,
+                                    findPosition: POSITIONS.ADMINISTRATOR.findPosition,
+                                    displayPosition: POSITIONS.ADMINISTRATOR.displayPosition,
                                 },
                                 {
                                     name: 'BOX C CERTIFIED',
@@ -100,8 +100,8 @@ module.exports = {
                                 },
                                 {
                                     name: 'BOX D APPROVED FOR PAYMENT',
-                                    findPosition: POSITIONS.ADMINISTRATOR.findPosition,
-                                    displayPosition: POSITIONS.ADMINISTRATOR.displayPosition,
+                                    findPosition: POSITIONS.DEPUTY_ADMINISTRATOR_FOR_ADMINISTRATIVE_AND_FINANCE_SECTOR.findPosition,
+                                    displayPosition: POSITIONS.DEPUTY_ADMINISTRATOR_FOR_ADMINISTRATIVE_AND_FINANCE_SECTOR.displayPosition,
                                 },
                             ]
                         },

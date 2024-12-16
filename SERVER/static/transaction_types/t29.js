@@ -8,7 +8,7 @@ module.exports = {
                 {
                     // under division manager
                     reportName: 'DISBURSEMENT VOUCHER',
-                    transactionType: 'Clothing/Uniform Allowance', 
+                    transactionType: 'Loyalty cash Award/Incentive', 
                     positionTypes: [
                         {
                             positionType: 'Below Division Manager',

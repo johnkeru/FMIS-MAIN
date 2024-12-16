@@ -74,7 +74,7 @@ const SignatoryDetails = ({ signatory, handleCloseMenu }) => {
                         <strong>Payee 6 Digits:</strong> {signatory.payeeDigits}
                     </Typography>
                     <Typography variant="subtitle1" gutterBottom>
-                        <strong>Payee Type:</strong> {signatory.payeeType}
+                        <strong>Position Type:</strong> {signatory.positionType}
                     </Typography>
                     <Typography variant="subtitle1" gutterBottom>
                         <strong>Date Submitted:</strong> {formatDate(signatory.createdAt)}

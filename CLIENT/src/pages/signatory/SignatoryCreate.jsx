@@ -475,7 +475,7 @@ const SignatoryCreate = () => {
                             >
                                 <AlertTitle sx={{ fontWeight: "bold", mb: 1 }}>Note</AlertTitle>
                                 The system provides an initial recommendation for the appropriate signatories.
-                                <strong>Please verify the details and ensure accuracy before submitting.</strong>
+                                <strong> Please verify the details and ensure accuracy before submitting.</strong>
                             </Alert>
                         </Fade>
                     )}

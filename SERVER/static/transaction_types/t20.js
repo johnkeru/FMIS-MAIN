@@ -73,8 +73,8 @@ module.exports = {
                                 },
                                 {
                                     name: 'BOX D APPROVED FOR PAYMENT',
-                                    findPosition: POSITIONS.SENIOR_DEPUTY_ADMINISTRATOR.findPosition,
-                                    displayPosition: POSITIONS.SENIOR_DEPUTY_ADMINISTRATOR.displayPosition,
+                                    findPosition: POSITIONS.DEPUTY_ADMINISTRATOR_FOR_ADMINISTRATIVE_AND_FINANCE_SECTOR.findPosition,
+                                    displayPosition: POSITIONS.DEPUTY_ADMINISTRATOR_FOR_ADMINISTRATIVE_AND_FINANCE_SECTOR.displayPosition,
                                 },
                             ]
                         },
@@ -96,8 +96,8 @@ module.exports = {
                                 },
                                 {
                                     name: 'BOX D APPROVED FOR PAYMENT',
-                                    findPosition: POSITIONS.ADMINISTRATOR.findPosition,
-                                    displayPosition: POSITIONS.ADMINISTRATOR.displayPosition,
+                                    findPosition: POSITIONS.DEPUTY_ADMINISTRATOR_FOR_ADMINISTRATIVE_AND_FINANCE_SECTOR.findPosition,
+                                    displayPosition: POSITIONS.DEPUTY_ADMINISTRATOR_FOR_ADMINISTRATIVE_AND_FINANCE_SECTOR.displayPosition,
                                 },
                             ]
                         },

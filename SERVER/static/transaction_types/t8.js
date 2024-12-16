@@ -65,8 +65,8 @@ module.exports = {
                             boxes: [
                                 {
                                     name: 'BOX A CERTIFIED',
-                                    findPosition: 'Department Manager A',
-                                    displayPosition: 'Manager, Administrative Department',
+                                    findPosition: POSITIONS.MANAGER_ADMINISTRATIVE_DEPARTMENT.findPosition,
+                                    displayPosition: POSITIONS.MANAGER_ADMINISTRATIVE_DEPARTMENT.displayPosition,
                                 },
                                 {
                                     name: 'BOX C CERTIFIED',

@@ -8,7 +8,7 @@ module.exports = {
                 {
                     // under division manager
                     reportName: 'DISBURSEMENT VOUCHER',
-                    transactionType: 'Clothing/Uniform Allowance', 
+                    transactionType: 'Contract of Service - First Payment', 
                     positionTypes: [
                         {
                             positionType: 'Below Division Manager',
