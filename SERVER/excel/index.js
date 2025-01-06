@@ -49,7 +49,7 @@ const employees = xlsx.utils.sheet_to_json(worksheet);
 // const employee = employees.filter(emp => /Balanay/i.test(emp.EmployeeFullName));
 // console.log(employee);
 
-const employee = employees.filter(emp => /frya/i.test(emp.EmployeeFullName));
+const employee = employees.filter(emp => /eunel/i.test(emp.EmployeeFullName));
 console.log(employee);
 
 

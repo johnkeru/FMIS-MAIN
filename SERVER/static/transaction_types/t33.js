@@ -8,7 +8,7 @@ module.exports = {
                 {
                     // under division manager
                     reportName: 'DISBURSEMENT VOUCHER',
-                    transactionType: 'Telephone/Communication Services', 
+                    transactionType: 'Reimbursements - Toll Fee/RFID/Fuel/Notary other Miscellaneous Expenses', 
                     positionTypes: [
                         {
                             positionType: 'Below Division Manager',
