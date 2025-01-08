@@ -7,6 +7,7 @@ const authRouter = require('./routers/auth_router');
 const roleRouter = require('./routers/role_router');
 const setterDataRouter = require('./routers/setter_data');
 const signatoriesRouter = require('./routers/signatories_router');
+const employeeRouter = require('./routers/employee_router');
 
 const app = express();
 app.use(cors({
@@ -30,5 +31,6 @@ app.use(setterDataRouter)
 app.use(authRouter)
 app.use(roleRouter)
 app.use(signatoriesRouter)
+app.use(employeeRouter)
 
 app.listen(5000, () => console.log('🚀', 'Server is now running'))
