@@ -1,5 +1,5 @@
 import { Box, Paper, Typography } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import {
   FaFileInvoiceDollar,
   FaMoneyBillWave,
@@ -43,6 +43,18 @@ const Dashboard = () => {
       link: "https://bc.fmis.nia.gov.ph",
     },
   ];
+
+  const [activeSystems, setActiveSystems] = React.useState(0);
+
+  useEffect(() => {
+    applications.map(async (app) => {
+      const response = await fetch(app.link);
+      if (response.ok) {
+        setActiveSystems((prev) => prev + 1);
+      }
+      return app;
+    });
+  }, []);
 
   return (
     <Box sx={{ p: 3, bgcolor: "#f5f5f5" }}>
@@ -92,7 +104,11 @@ const Dashboard = () => {
           }}
         >
           {[
-            { value: "4", label: "Active Systems", color: "#1976d2" },
+            {
+              value: activeSystems,
+              label: "Active Systems",
+              color: "#1976d2",
+            },
             { value: "8", label: "Pending Transactions", color: "#388e3c" },
             { value: "15", label: "Completed Transactions", color: "#f57c00" },
           ].map((item, index) => (
@@ -147,6 +163,7 @@ const Dashboard = () => {
           }}
         >
           {applications.map((app, index) => (
+            // if not active display something that does not clickable
             <Box
               key={index}
               sx={{
@@ -168,10 +185,11 @@ const Dashboard = () => {
                     boxShadow: "0 4px 10px rgba(0, 0, 0, 0.1)",
                     display: "flex",
                     flexDirection: "column",
-                    border: "3px solid",
-                    borderColor: "rgba(55, 94, 56, .8)",
                     justifyContent: "center",
                     alignItems: "center",
+                    border: 3,
+                    borderColor: "rgba(55, 94, 56, .8)",
+                    borderRadius: 2,
                     p: 5,
                     height: "100%",
                     transition: "all 0.3s ease-in-out",

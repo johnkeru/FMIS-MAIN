@@ -1,9 +1,13 @@
 # strictly check first before running
 GET http://localhost:5000/setRolesAndAssign
-
-
 ###
 GET http://localhost:5000/setSignatories
+
+### PRODUCTION
+GET http://fmis.nia.gov.ph/setRolesAndAssign
+###
+GET http://fmis.nia.gov.ph/setSignatories
+
 
 ###
 GET http://localhost:5000/get-transaction-types-by-report-name?reportName=DISBURSEMENT%20VOUCHER&positionType=Department%20Manager%20&%20Project%20Manager

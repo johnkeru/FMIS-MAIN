@@ -31,5 +31,5 @@ export const isCashRoles = (currentUser) => {
 }
 
 export const isAllowAdminsOnly = (currentUser) => {
-    return isSuperAdmin(currentUser) || isBudgetAdmin(currentUser) || isAccountingAdmin(currentUser) || isDVAdmin(currentUser) || isCashAdmin(currentUser)
+    return isSuperAdmin(currentUser) || isBudgetAdmin(currentUser) || isAccountingAdmin(currentUser) || isCashAdmin(currentUser)
 }
