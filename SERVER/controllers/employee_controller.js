@@ -5,8 +5,14 @@ const worksheet = workbook.Sheets[sheetName];
 const employees = xlsx.utils.sheet_to_json(worksheet);
 
 
-exports.getEmployeeDetailsById = (req, res) => { 
-    const employee = employees.find(emp => emp.EmployeeID === parseInt(req.params.id));
-    res.json(employee);
+exports.getEmployeeDetails = (req, res) => { 
+    const id = req.query.id
+    const name = req.query.name
+    
+    let employee = null;
+    if (id) employee = employees.find(emp => emp.EmployeeID === parseInt(id));
+    else if (name) employee = employees.find(emp => emp.EmployeeFullName.toLowerCase().includes(name.toLowerCase()));
+    
+    res.json({employee});
 }
 

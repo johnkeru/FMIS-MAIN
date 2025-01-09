@@ -1,1 +1,3 @@
-GET http://localhost:5000/employee/236978
+GET http://localhost:5000/employee?id=236978
+###
+GET http://localhost:5000/employee?name=awefwe
