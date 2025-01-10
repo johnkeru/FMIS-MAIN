@@ -152,9 +152,12 @@ const SignatoryCreate = () => {
       const payeeDivision =
         typeof payeeValue === "object" ? payeeValue.Division : null;
       // Automated payee type matching
-      const positionTypeBoxes = transactionType.positionTypes.find(
-        (pos) => pos.positionType === positionType
-      );
+
+      const positionTypeBoxes =
+        transactionType.responsibilityCenters[0].positionTypes.find(
+          (pos) => pos.positionType === positionType
+        );
+
       const updatedBoxes = positionTypeBoxes.boxes
         .map((boxInfo) => {
           const signatory = data.employees.find((emp) =>

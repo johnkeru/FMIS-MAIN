@@ -57,7 +57,6 @@ const LoginForm = () => {
     try {
       setLoading(true);
       const res = await api.post("/login", data);
-      console.log(res.data);
       // await setCurrentUser();
       if (nextLink) return (location.href = nextLink);
       else {

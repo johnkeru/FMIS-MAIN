@@ -1,14 +1,14 @@
 import { Box, Paper, Typography } from "@mui/material";
-import React, { useEffect } from "react";
+import React from "react";
 import {
   FaFileInvoiceDollar,
   FaMoneyBillWave,
   FaPiggyBank,
 } from "react-icons/fa";
+import { FaMoneyBillTransfer } from "react-icons/fa6";
+import { PiLinkSimpleBold } from "react-icons/pi";
 import { Link } from "react-router-dom";
 import { useUser } from "../context/UserContext";
-import { PiLinkSimpleBold } from "react-icons/pi";
-import { FaMoneyBillTransfer } from "react-icons/fa6";
 
 const Dashboard = () => {
   const { currentUser } = useUser();
@@ -43,18 +43,6 @@ const Dashboard = () => {
       link: "https://bc.fmis.nia.gov.ph",
     },
   ];
-
-  const [activeSystems, setActiveSystems] = React.useState(0);
-
-  useEffect(() => {
-    applications.map(async (app) => {
-      const response = await fetch(app.link);
-      if (response.ok) {
-        setActiveSystems((prev) => prev + 1);
-      }
-      return app;
-    });
-  }, []);
 
   return (
     <Box sx={{ p: 3, bgcolor: "#f5f5f5" }}>
@@ -91,8 +79,8 @@ const Dashboard = () => {
           Dashboard Overview
         </Typography>
         <Typography variant="body1">
-          These are all the systems under FMIS, each serving a specific function
-          within the organization.
+          This dashboard provides a summary of key reports from various systems,
+          offering insights to support organizational decision-making.
         </Typography>
         <Box
           sx={{
@@ -105,7 +93,7 @@ const Dashboard = () => {
         >
           {[
             {
-              value: activeSystems,
+              value: 4,
               label: "Active Systems",
               color: "#1976d2",
             },
