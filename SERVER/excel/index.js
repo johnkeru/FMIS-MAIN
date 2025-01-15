@@ -1,9 +1,8 @@
-const xlsx = require('xlsx');
-const workbook = xlsx.readFile('excel/POSITION-EMPLOYEE-TEMPLATED-FULL.xlsx');
+const xlsx = require("xlsx");
+const workbook = xlsx.readFile("excel/POSITION-EMPLOYEE-TEMPLATED-FULL.xlsx");
 const sheetName = workbook.SheetNames[0];
 const worksheet = workbook.Sheets[sheetName];
 const employees = xlsx.utils.sheet_to_json(worksheet);
-
 
 // const empsRoles = new Set(employees.map(emp => emp.PositionTitle))
 // console.log(empsRoles);
@@ -49,17 +48,16 @@ const employees = xlsx.utils.sheet_to_json(worksheet);
 // const employee = employees.filter(emp => /Balanay/i.test(emp.EmployeeFullName));
 // console.log(employee);
 
-const employee = employees.filter(emp => /eunel/i.test(emp.EmployeeFullName));
+const employee = employees.filter((emp) =>
+  /jerimae/i.test(emp.EmployeeFullName)
+);
 console.log(employee);
-
-
 
 // const employee = employees.filter(emp => emp.SG == 7 && emp.Status === 'PERMANENT');
 // console.log(employee);
 
 // const employee = employees.filter(emp => /FINANCIAL MANAGEMENT DEPARTMENT/i.test(emp.Department) && /Department Manager A/i.test(emp.PositionTitle));
 // console.log(employee);
-
 
 // iisa lng pala
 // const employee = employees.filter(emp => /HUMAN RESOURCES DIVISION/i.test(emp.Division) && /Human Resource Management Officer IV/i.test(emp.PositionTitle));
@@ -81,8 +79,6 @@ console.log(employee);
 // const boxA = employees.filter(emp => emp.PositionTitle.includes((payee.PositionTitle)))
 // console.log(boxA)
 
-
-
 // first get the transaction type
 // next get the payee
-// 
+//

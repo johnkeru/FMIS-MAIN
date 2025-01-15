@@ -76,6 +76,32 @@ exports.getSetSignatories = async (req, res) => {
   }
 };
 
+exports.getPositionTitles = async (req, res) => {
+  try {
+    const positionTitles = await positionTitle.find();
+    res.json({ positionTitles });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server error");
+  }
+};
+
+// SET SIGNATORY ENTITY HERE!
+exports.createSetSignatory = async (req, res) => {
+  try {
+    const payload = req.body;
+    const setSign = new setSignatory(payload);
+    await setSign.save();
+    res.status(201).json({ message: "Set Signatory created successfully" });
+  } catch (e) {
+    if (e.code === 11000) {
+      res.status(400).json({ error: "Transaction Type already exists" });
+    } else {
+      res.status(500).json({ error: "Server error" });
+    }
+  }
+};
+
 exports.getTransactionTypesByReportName = async (req, res) => {
   try {
     const user = req.user;

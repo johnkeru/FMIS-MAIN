@@ -22,7 +22,7 @@ const drawerWidth = 280;
 
 const Dashboard = () => {
   const nav = useNavigate();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(true);
 
   // Detect if screen size is small (breakpoint of 600px)
   const isMdScreen = useMediaQuery((theme) => theme.breakpoints.down("md"));

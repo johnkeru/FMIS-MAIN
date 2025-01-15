@@ -1,5 +1,3 @@
-file/s to upload on production:
-App
-Dashboard
-Login
-SignatoryCreate
+connect to mssql. (possibly install mssql locally)
+rdlc node + react alternative for generating report.
+ 

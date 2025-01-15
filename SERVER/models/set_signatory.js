@@ -11,8 +11,8 @@ const boxSchema = mongoose.Schema({
 });
 
 const positionSchema = mongoose.Schema({
-  positionType: String,
   boxes: [boxSchema], // show this when type is 'position'
+  positionType: String,
 });
 
 // Responsibility Center schema
@@ -24,7 +24,7 @@ const responsibilityCenterSchema = mongoose.Schema({
 // Transaction Type schema
 const setSignatorychema = mongoose.Schema({
   reportName: String, // to filter what transactions types to show
-  transactionType: String,
+  transactionType: { type: String, required: true, unique: true }, // e.g. "Disbursement Voucher"
   responsibilityCenters: { type: [responsibilityCenterSchema], required: true },
 
   createdAt: { type: Date, default: Date.now },
