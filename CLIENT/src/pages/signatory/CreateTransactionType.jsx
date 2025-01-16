@@ -89,7 +89,7 @@ const CreateTransactionType = () => {
   return (
     <>
       <DashboardHeader
-        title="Create New Transaction Type"
+        title="Create Transaction Type Signatories"
         description="Add a new transaction type"
       />
 

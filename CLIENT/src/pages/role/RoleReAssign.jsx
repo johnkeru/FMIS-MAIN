@@ -122,11 +122,12 @@ const RolesComponent = ({ roles, currentUser, data, setLoading: setParentLoading
         const selectedIds = Object.keys(checkedRoles).filter(roleId => checkedRoles[roleId]);
 
         // Check if at least one role is selected
-        if (selectedIds.length === 0) {
-            setError('roles', { message: "At least one role must be selected.", type: 'required' });
-            toast.error('You must select at least one role', { position: 'top-right' });
-            return; // Prevent submission if no roles are selected
-        }
+        // UPDATED as of: 1/16/25. uncomment this if you want to prevent submission if no roles are selected
+        // if (selectedIds.length === 0) {
+        //     setError('roles', { message: "At least one role must be selected.", type: 'required' });
+        //     toast.error('You must select at least one role', { position: 'top-right' });
+        //     return; // Prevent submission if no roles are selected
+        // }
         setParentLoading(true)
         setLoading(true);
         const payload = {

@@ -57,7 +57,7 @@ const LoginForm = () => {
     try {
       setLoading(true);
       const res = await api.post("/login", data);
-      // await setCurrentUser();
+      await setCurrentUser();
       if (nextLink) return (location.href = nextLink);
       else {
         nav("/dashboard");
